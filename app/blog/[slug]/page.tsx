@@ -9,22 +9,32 @@ const POSTS: Record<string, Post> = {
   "hello-next": {
     slug: "hello-next",
     title: "Hello Next.js 15",
-    body: "Este é um post de exemplo estático usando ISR."
+    body: "Este é um post de exemplo estático usando ISR.",
   },
   "ssr-ssg-isr": {
     slug: "ssr-ssg-isr",
     title: "SSR, SSG e ISR",
-    body: "Quando usar SSR, SSG e ISR em projetos reais."
-  }
+    body: "Quando usar SSR, SSG e ISR em projetos reais.",
+  },
 };
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const post = POSTS[params.slug];
   if (!post) return { title: "Post not found" };
   return {
     title: post.title,
-    description: post.body.slice(0, 120)
+    description: post.body.slice(0, 120),
   };
+}
+
+export async function generateStaticParams() {
+  return Object.values(POSTS).map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {

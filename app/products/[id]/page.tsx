@@ -1,26 +1,18 @@
-import { notFound } from "next/navigation";
-
-async function fetchProduct(id: string) {
-  // SSR request (no-store) to internal API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/products?id=${id}`, {
-    cache: "no-store"
-  });
-  if (!res.ok) return null;
-  return res.json() as Promise<{ id: string; name: string; price: number } | null>;
-}
+import { Suspense } from "react";
+import { ProductDetail } from "./ProductDetails";
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await fetchProduct(params.id);
-  if (!product) notFound();
-
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold">Product {product.id}</h1>
-      <p className="text-white/80">Name: {product.name}</p>
-      <p className="text-white/80">Price: ${product.price.toFixed(2)}</p>
+      <Suspense fallback={<div className="text-white">Loading...</div>}>
+        <ProductDetail id={params.id} />
+      </Suspense>
       <form action={refreshPrice}>
-        <input type="hidden" name="id" value={product.id} />
-        <button className="mt-2 rounded-xl border border-white/20 px-3 py-1 text-sm hover:bg-white/10" type="submit">
+        <input type="hidden" name="id" value={params.id} />
+        <button
+          className="mt-2 rounded-xl border border-white/20 px-3 py-1 text-sm hover:bg-white/10"
+          type="submit"
+        >
           Revalidate Price (Server Action)
         </button>
       </form>
