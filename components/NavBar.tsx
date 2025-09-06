@@ -8,7 +8,7 @@ import AuthNav from "./AuthNav";
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/products/123", label: "Product [id]" },
+  { href: "/products", label: "Products" },
   { href: "/blog", label: "Blog" },
   { href: "/dashboard", label: "Dashboard" },
 ];

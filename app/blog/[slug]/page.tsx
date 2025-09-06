@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/config/constants";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -24,10 +25,36 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const post = POSTS[params.slug];
-  if (!post) return { title: "Post not found" };
+  if (!post) {
+    return {
+      title: "Post não encontrado",
+      description: "Este post não existe ou foi removido.",
+    };
+  }
+
   return {
     title: post.title,
     description: post.body.slice(0, 120),
+    openGraph: {
+      title: post.title,
+      description: post.body.slice(0, 120),
+      type: "article",
+      url: `${BASE_URL}/blog/${post.slug}`,
+      images: [
+        {
+          url: `${BASE_URL}/og/${post.slug}.png`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.body.slice(0, 120),
+      images: [`${BASE_URL}/og/${post.slug}.png`],
+    },
   };
 }
 

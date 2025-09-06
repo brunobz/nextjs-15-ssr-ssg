@@ -27,7 +27,7 @@ export default function AuthNav() {
       onClick={() => signIn("github")}
     >
       <Image src={GithubIcon} alt="Github Icon" width={20} />
-      Entrar com GitHub
+      Sign in
     </button>
   );
 }
