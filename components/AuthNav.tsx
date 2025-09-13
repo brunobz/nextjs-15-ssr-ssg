@@ -1,11 +1,15 @@
 "use client";
 
 import { signIn, signOut, useSession } from "next-auth/react";
-import GithubIcon from "assets/images/github-mark-white.png";
+import GithubIconWhite from "assets/images/github-mark-white.png";
+import GithubIconDark from "assets/images/github-mark.png";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 export default function AuthNav() {
   const { data: session } = useSession();
+  const { theme } = useTheme();
+  const GithubIcon = theme === "dark" ? GithubIconWhite : GithubIconDark;
 
   if (session?.user) {
     return (

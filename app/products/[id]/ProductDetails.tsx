@@ -16,8 +16,8 @@ export const ProductDetail = async ({ id }: { id: string }) => {
   return (
     <>
       <h1 className="text-2xl font-bold">Product {product.id}</h1>
-      <p className="text-white/80">Name: {product.name}</p>
-      <p className="text-white/80">Price: ${product.price.toFixed(2)}</p>
+      <p className="text-[var(--fg-muted)]">Name: {product.name}</p>
+      <p className="text-[var(--fg-muted)]">Price: ${product.price.toFixed(2)}</p>
     </>
   );
 };

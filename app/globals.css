@@ -3,12 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0b0d10;
-  --fg: #e8eef2;
+  --bg: white;
+  --fg: black;
+  --fg-muted: rgba(0, 0, 0, 0.6);
 }
 
-html, body {
+html,
+body {
   height: 100%;
+}
+
+html.dark {
+  --bg: black;
+  --fg: white;
+  --fg-muted: rgba(255, 255, 255, 0.6);
+  --muted: #94a3b8;
+  --card: rgba(255, 255, 255, 0.03);
+  --accent: #7c3aed;
 }
 
 body {

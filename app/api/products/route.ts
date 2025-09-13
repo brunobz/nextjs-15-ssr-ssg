@@ -1,8 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const DB = [
-  { id: "123", name: "Blue Widget", price: 19.99 },
-  { id: "456", name: "Red Widget", price: 29.5 }
+  {
+    id: "react-ebook",
+    name: "React Fundamentals eBook",
+    price: 29.9,
+    description: "Learn the fundamentals of React with practical examples.",
+  },
+  {
+    id: "nextjs-course",
+    name: "Next.js Advanced Course",
+    price: 79.9,
+    description: "Master SSR, ISR, and advanced optimizations in Next.js 15.",
+  },
+  {
+    id: "tailwind-guide",
+    name: "TailwindCSS Design Guide",
+    price: 39.9,
+    description: "A modern guide to building fast, beautiful UIs with Tailwind.",
+  },
 ];
 
 export async function GET(req: NextRequest) {

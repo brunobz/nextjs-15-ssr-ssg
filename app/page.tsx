@@ -1,34 +1,34 @@
+import Link from "next/link";
+
 export default function HomePage() {
   return (
-    <section className="space-y-6">
-      <h1 className="text-3xl font-bold">Next 15 + Tailwind Starter</h1>
-      <p className="text-white/80">
-        Este template serve como base para estudar SSR, SSG, ISR, Server Components, API Routes, Middleware e SEO.
-      </p>
+    <section className="relative isolate px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-3xl text-center">
+        {/* Hero */}
+        <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+          Welcome to <span className="text-primary">Next Store</span>
+        </h1>
+        <p className="mt-6 text-lg leading-8 text-[var(--fg-muted)]">
+          A modern application with Next.js 15, SSR, SSG, ISR, authentication, and optimized SEO.
+          Explore products and read exclusive content on our blog.
+        </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card title="SSR (Server-Side Rendering)">
-          <p>Exemplo em <code>/products/[id]</code> consumindo a própria API interna.</p>
-        </Card>
-        <Card title="SSG / ISR">
-          <p>Exemplo em <code>/blog</code> com <code>export const revalidate = 60</code>.</p>
-        </Card>
-        <Card title="API Routes">
-          <p>Veja <code>/api/products</code> e <code>/api/health</code> (GET).</p>
-        </Card>
-        <Card title="Middleware + Auth">
-          <p><code>/dashboard</code> é protegido via <code>middleware.ts</code>. Use <code>/api/auth/mock</code> para simular login.</p>
-        </Card>
+        {/* Call to Action */}
+        <div className="mt-10 flex items-center justify-center gap-x-6">
+          <Link
+            href="/products"
+            className="rounded-xl bg-[var(--fg)] px-5 py-3 text-base font-semibold text-[var(--bg)] shadow-md hover:opacity-90 transition"
+          >
+            🚀 Explore Products
+          </Link>
+          <Link
+            href="/blog"
+            className="rounded-xl border border-[var(--fg-muted)] px-5 py-3 text-base font-semibold text-[var(--fg)] hover:bg-[var(--fg-muted)] hover:text-[var(--bg)] transition"
+          >
+            📝 Read Blog
+          </Link>
+        </div>
       </div>
     </section>
-  );
-}
-
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="rounded-2xl border border-white/10 p-4">
-      <h2 className="font-semibold mb-2">{title}</h2>
-      <div className="text-white/80">{children}</div>
-    </div>
   );
 }

@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   if (!post) notFound();
 
   return (
-    <article className="prose prose-invert max-w-none">
+    <article>
       <h1>{post.title}</h1>
       <p>{post.body}</p>
     </article>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import AuthNav from "./AuthNav";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,22 +17,22 @@ const links = [
 export default function NavBar() {
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []); // avoid hydration mismatch
+  useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="w-full border-b border-white/10 bg-black/30 backdrop-blur supports-[backdrop-filter]:bg-black/20">
+    <nav className="w-full border-b border-white/10">
       <div className="container flex items-center justify-between py-3">
         <Link href="/" className="font-semibold tracking-wide">
-          Next 15 Starter
+          Next 15 E-Book Store
         </Link>
         <ul className="flex gap-3 text-sm">
           {links.map((l) => {
             const active =
               mounted && pathname.startsWith(l.href) && l.href !== "/"
-                ? "text-white"
+                ? "text-black dark:text-white"
                 : pathname === l.href
-                  ? "text-white"
-                  : "text-white/60 hover:text-white";
+                  ? "text-black dark:text-white"
+                  : "text-[var(--fg-muted)] hover:text-black hover:dark:text-white";
             return (
               <li key={l.href}>
                 <Link className={`px-2 py-1 rounded-lg ${active}`} href={l.href}>
@@ -40,6 +41,8 @@ export default function NavBar() {
               </li>
             );
           })}
+
+          <ThemeToggle />
           <AuthNav />
         </ul>
       </div>

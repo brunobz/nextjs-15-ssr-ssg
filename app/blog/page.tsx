@@ -1,9 +1,8 @@
-export const revalidate = 60; // ISR every 60 seconds
+export const revalidate = 60;
 
 type Post = { slug: string; title: string; excerpt: string };
 
 export async function getPosts(): Promise<Post[]> {
-  // Simula uma fonte SSG/ISR com cache padrão (force-cache)
   return [
     { slug: "hello-next", title: "Hello Next.js 15", excerpt: "Começando com o App Router." },
     { slug: "ssr-ssg-isr", title: "SSR, SSG e ISR", excerpt: "Quando usar cada estratégia." },
@@ -22,7 +21,7 @@ export default async function BlogIndexPage() {
             <a href={`/blog/${p.slug}`} className="font-semibold hover:underline">
               {p.title}
             </a>
-            <p className="text-white/70 text-sm">{p.excerpt}</p>
+            <p className="text-[var(--fg-muted)] text-sm">{p.excerpt}</p>
           </li>
         ))}
       </ul>
