@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     title: "Next 15 Tailwind Starter",
     description: "Learn SSR/SSG/ISR with a production-like skeleton.",
     type: "website",
-    url: "https://example.com",
+    url: "https://localhost:3000",
   },
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://localhost:3000"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

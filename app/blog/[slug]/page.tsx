@@ -1,3 +1,4 @@
+import NotFound from "@/app/not-found";
 import { BASE_URL } from "@/config/constants";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -66,7 +67,10 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = POSTS[params.slug];
-  if (!post) notFound();
+
+  if (!post) {
+    return NotFound();
+  }
 
   return (
     <article>

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "title": "React Course",
+    "description": "Learn the fundamentals of React with practical examples.",
+    "price": 99,
+    "image": "/products/react.png"
+  },
+  {
+    "id": "2",
+    "title": "Next.js eBook",
+    "description": "Master SSR, ISR, and advanced optimizations in Next.js 15.",
+    "price": 49,
+    "image": "/products/next.png"
+  },
+  {
+    "id": "3",
+    "title": "Tailwind Guide",
+    "description": "A modern guide to building fast, beautiful UIs with Tailwind.",
+    "price": 39.9,
+    "image": "/products/tailwind.png"
+  }
+]

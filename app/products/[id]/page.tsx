@@ -1,32 +1,64 @@
-import { Suspense } from "react";
-import { ProductDetail } from "./ProductDetails";
+import Image from "next/image";
+import NotFound from "@/app/not-found";
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  return (
-    <section className="space-y-4">
-      <Suspense fallback={<div className="text-white">Loading...</div>}>
-        <ProductDetail id={params.id} />
-      </Suspense>
-      <form action={refreshPrice}>
-        <input type="hidden" name="id" value={params.id} />
-        <button
-          className="mt-2 rounded-xl border border-white/20 px-3 py-1 text-sm hover:bg-white/10"
-          type="submit"
-        >
-          Revalidate Price (Server Action)
-        </button>
-      </form>
-    </section>
-  );
+interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
 }
 
-// Server Action example to revalidate a tag
-export const dynamic = "force-dynamic";
+async function fetchProduct(id: string): Promise<Product | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/products/${id}`, {
+    next: { revalidate: 300 },
+  });
 
-async function refreshPrice(formData: FormData) {
-  "use server";
-  const id = String(formData.get("id"));
-  // In a real app, you'd update data and then revalidate by tag/path
-  // revalidateTag(`product:${id}`)  // requires fetch tag on data source
-  console.log("Pretend to revalidate product", id);
+  if (!res.ok) return null;
+
+  return res.json();
+}
+
+export default async function ProductPage({ params }: { params: { id: string } }) {
+  const product = await fetchProduct(params.id);
+
+  if (!product) {
+    return NotFound();
+  }
+
+  return (
+    <article className="max-w-3xl mx-auto space-y-6" aria-labelledby="product-title">
+      {/* Product image */}
+      <div className="aspect-video relative overflow-hidden rounded-lg">
+        <Image
+          src={product.image}
+          alt={`Cover image of ${product.title}`}
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Product info */}
+      <header>
+        <h1 id="product-title" className="text-3xl font-bold">
+          {product.title}
+        </h1>
+      </header>
+
+      <p className="text-muted-foreground text-lg">{product.description}</p>
+
+      <p className="text-primary font-bold text-2xl" aria-label={`Price: R$ ${product.price}`}>
+        R$ {product.price}
+      </p>
+
+      {/* CTA */}
+      <button
+        className="rounded-xl bg-[var(--fg)] px-5 py-3 text-base font-semibold text-[var(--bg)] shadow-md hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-primary"
+        aria-label={`Buy ${product.title} now for R$ ${product.price}`}
+      >
+        Buy Now
+      </button>
+    </article>
+  );
 }

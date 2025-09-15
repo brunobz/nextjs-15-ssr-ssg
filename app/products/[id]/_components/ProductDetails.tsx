@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 
 async function fetchProduct(id: string) {
-  // SSR request (no-store) to internal API
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/api/products?id=${id}`, {
     cache: "no-store",
   });

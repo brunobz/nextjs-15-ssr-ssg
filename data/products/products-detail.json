@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "title": "React Course",
+    "description": "Learn React",
+    "price": 99,
+    "image": "/products/react.png"
+  },
+  {
+    "id": "2",
+    "title": "Next.js E-Book",
+    "description": "Master Next.js",
+    "price": 49,
+    "image": "/products/next.png"
+  },
+  {
+    "id": "3",
+    "title": "Tailwind Guide",
+    "description": "Master Next.js",
+    "price": 49,
+    "image": "/products/next.png"
+  }
+]
